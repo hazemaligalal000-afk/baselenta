@@ -38,15 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const phone = document.getElementById('phone').value;
             const governorate = document.getElementById('governorate').value;
             const address = document.getElementById('address').value;
-            const quantity = document.getElementById('quantity').value;
+            const quantitySelect = document.getElementById('quantity');
+            const quantityText = quantitySelect.options[quantitySelect.selectedIndex].text.split(' - ')[0];
+            const price = quantitySelect.options[quantitySelect.selectedIndex].getAttribute('data-price');
 
-            const message = `طلب جديد لمنتج بيسالينتا - Besalenta\n\n` +
-                `الاسم: ${name}\n` +
-                `رقم الموبايل: ${phone}\n` +
-                `المحافظة: ${governorate}\n` +
-                `العنوان: ${address}\n` +
-                `الكمية: ${quantity} عبوة\n\n` +
-                `أريد تأكيد الطلب الآن.`;
+            const message = `*طلب جديد*\n` +
+                `-------------------------------------------\n` +
+                `👤 *الاسم:* ${name}\n` +
+                `📱 *الموبايل:* ${phone}\n` +
+                `📍 *المحافظة:* ${governorate}\n` +
+                `📦 *الكمية:* ${quantityText}\n` +
+                `🏠 *العنوان:* ${address}\n` +
+                `💰 *الإجمالي:* ${price} جنيه\n` +
+                `-------------------------------------------\n` +
+                `✅ الدفع عند الاستلام - شحن سريع`;
 
             const encodedMessage = encodeURIComponent(message);
             const whatsappURL = `https://wa.me/201020760067?text=${encodedMessage}`;
