@@ -36,11 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
+            const governorate = document.getElementById('governorate').value;
+            const address = document.getElementById('address').value;
+            const quantity = document.getElementById('quantity').value;
 
-            // Here you would typically send data to a server or Google Sheets
-            // For now, let's show a success message
-            alert(`شكراً لك يا ${name}! تم استلام طلبك بنجاح. سيتواصل معك فريقنا قريباً على الرقم ${phone}.`);
-            orderForm.reset();
+            const message = `طلب جديد لمنتج بيسالينتا - Besalenta\n\n` +
+                `الاسم: ${name}\n` +
+                `رقم الموبايل: ${phone}\n` +
+                `المحافظة: ${governorate}\n` +
+                `العنوان: ${address}\n` +
+                `الكمية: ${quantity} عبوة\n\n` +
+                `أريد تأكيد الطلب الآن.`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/201020760067?text=${encodedMessage}`;
+
+            window.open(whatsappURL, '_blank');
         });
     }
 
