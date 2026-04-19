@@ -40,7 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const address = document.getElementById('address').value;
             const quantitySelect = document.getElementById('quantity');
             const quantityText = quantitySelect.options[quantitySelect.selectedIndex].text.split(' - ')[0];
-            const price = quantitySelect.options[quantitySelect.selectedIndex].getAttribute('data-price');
+            let price = parseInt(quantitySelect.options[quantitySelect.selectedIndex].getAttribute('data-price'));
+            let bumpText = '';
+
+            const orderBump = document.getElementById('orderBump');
+            if (orderBump && orderBump.checked) {
+                price += 200;
+                bumpText = `➕ *إضافة:* شاي فاتريكس للديتوكس (+200 ج.م)\n`;
+            }
 
             const message = `*طلب جديد*\n` +
                 `-------------------------------------------\n` +
@@ -48,13 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 `📱 *الموبايل:* ${phone}\n` +
                 `📍 *المحافظة:* ${governorate}\n` +
                 `📦 *الكمية:* ${quantityText}\n` +
+                bumpText +
                 `🏠 *العنوان:* ${address}\n` +
                 `💰 *الإجمالي:* ${price} جنيه\n` +
                 `-------------------------------------------\n` +
                 `✅ الدفع عند الاستلام - شحن سريع`;
 
             const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/201020760067?text=${encodedMessage}`;
+            const whatsappURL = `https://wa.me/201280912187?text=${encodedMessage}`;
 
             window.open(whatsappURL, '_blank');
         });
@@ -100,4 +108,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(updateTimer, 1000);
     updateTimer();
+
+    // 1. Live Sales Toast Logic
+    const salesToast = document.getElementById('salesToast');
+    const toastText = document.getElementById('toastText');
+    const toastTime = document.getElementById('toastTime');
+    const cities = ['القاهرة', 'الإسكندرية', 'الجيزة', 'المنصورة', 'طنطا', 'أسيوط', 'الزقازيق'];
+    const names = ['أحمد', 'محمد', 'محمود', 'سارة', 'فاطمة', 'نورهان', 'علي', 'مصطفى'];
+    
+    function showRandomToast() {
+        if (!salesToast) return;
+        const randomCity = cities[Math.floor(Math.random() * cities.length)];
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomAmount = Math.floor(Math.random() * 3) + 1;
+        const randomMins = Math.floor(Math.random() * 59) + 1;
+        
+        toastText.innerText = `${randomName} من ${randomCity} قام بشراء ${randomAmount} عبوة منذ قليل!`;
+        toastTime.innerText = randomMins;
+        
+        salesToast.classList.add('show');
+        
+        setTimeout(() => {
+            salesToast.classList.remove('show');
+        }, 5000);
+    }
+    
+    if (salesToast) {
+        setTimeout(() => {
+            setInterval(showRandomToast, 15000); // Show every 15 seconds
+        }, 5000);
+    }
+
+    // 2. Scarcity Bar Logic
+    let stockCount = 12;
+    const stockEl = document.getElementById('stock-count');
+    if (stockEl) {
+        setInterval(() => {
+            if (stockCount > 3) { // Don't let it drop below 3 to keep scarcity active but believable
+                if (Math.random() > 0.7) { // 30% chance to drop every interval
+                    stockCount--;
+                    stockEl.innerText = stockCount;
+                    document.querySelector('.progress-bar-fill').style.width = (stockCount / 15 * 100) + '%';
+                }
+            }
+        }, 10000);
+    }
+
+    // 3. Exit Intent Popup
+    const exitPopup = document.getElementById('exitPopup');
+    const closePopup = document.getElementById('closePopup');
+    let popupShown = false;
+
+    if (exitPopup) {
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !popupShown) {
+                exitPopup.classList.add('show');
+                popupShown = true;
+            }
+        });
+
+        closePopup.addEventListener('click', () => {
+            exitPopup.classList.remove('show');
+        });
+
+        document.getElementById('claimDiscount').addEventListener('click', () => {
+            exitPopup.classList.remove('show');
+        });
+    }
 });
