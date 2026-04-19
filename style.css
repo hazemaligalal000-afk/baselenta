@@ -1,8 +1,8 @@
 :root {
-    --primary-blue: #1e3a8a;
-    --primary-green: #10b981;
-    --accent-yellow: #f59e0b;
-    --bg-light: #f8fafc;
+    --primary-blue: #235c36; /* Dark Green from label */
+    --primary-green: #3a8c4c; /* Lighter Green */
+    --accent-yellow: #dca71d; /* Gold from 'PREMIUM' and 'rix' */
+    --bg-light: #f4fdf4; /* Slightly greenish light background */
     --text-dark: #1e293b;
     --text-muted: #64748b;
     --white: #ffffff;
@@ -397,7 +397,7 @@ section {
 .offer-content {
     flex: 1.2;
     padding: 60px;
-    background: linear-gradient(135deg, var(--primary-blue) 0%, #1e40af 100%);
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #1a472a 100%);
     color: white;
 }
 
