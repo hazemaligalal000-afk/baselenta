@@ -154,25 +154,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 10000);
     }
 
-    // 3. Exit Intent Popup
-    const exitPopup = document.getElementById('exitPopup');
-    const closePopup = document.getElementById('closePopup');
-    let popupShown = false;
-
-    if (exitPopup) {
-        document.addEventListener('mouseleave', (e) => {
-            if (e.clientY < 0 && !popupShown) {
-                exitPopup.classList.add('show');
-                popupShown = true;
-            }
-        });
-
-        closePopup.addEventListener('click', () => {
-            exitPopup.classList.remove('show');
-        });
-
-        document.getElementById('claimDiscount').addEventListener('click', () => {
-            exitPopup.classList.remove('show');
-        });
-    }
 });
