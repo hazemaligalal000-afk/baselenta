@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `✅ الدفع عند الاستلام - شحن سريع`;
 
             const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/201280912187?text=${encodedMessage}`;
+            const whatsappURL = `https://wa.me/201022865078?text=${encodedMessage}`;
 
             window.open(whatsappURL, '_blank');
         });
