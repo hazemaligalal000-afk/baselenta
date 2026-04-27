@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const orderBump = document.getElementById('orderBump');
             if (orderBump && orderBump.checked) {
-                price += 870;
-                bumpText = `➕ *إضافة:* كبسولات الحرق (+870 ج.م)\n`;
+                price += 450;
+                bumpText = `➕ *إضافة:* عبوة ماتشا (+450 ج.م)\n`;
             }
 
             const message = `*طلب جديد*\n` +

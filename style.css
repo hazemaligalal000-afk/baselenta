@@ -1,15 +1,16 @@
 :root {
-    --primary-blue: #235c36; /* Dark Green from label */
-    --primary-green: #3a8c4c; /* Lighter Green */
-    --accent-yellow: #dca71d; /* Gold from 'PREMIUM' and 'rix' */
-    --bg-light: #f4fdf4; /* Slightly greenish light background */
-    --text-dark: #1e293b;
-    --text-muted: #64748b;
+    --primary-magenta: #A1006B; /* Main Box Color */
+    --primary-cyan: #00AEEF; /* Logo Cyan */
+    --primary-green: #8DC63F; /* Leaf Green */
+    --coffee-brown: #4a2c2a; /* Rich Coffee Brown */
+    --bg-light: #fff5f7; /* Very light magenta tinted background */
+    --text-dark: #2d1a1a;
+    --text-muted: #6b5a5a;
     --white: #ffffff;
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-    --transition: all 0.3s ease;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -39,7 +40,7 @@ body {
 /* Header & Nav */
 header {
     background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -56,7 +57,7 @@ nav {
 .logo {
     font-weight: 800;
     font-size: 1.5rem;
-    color: var(--primary-blue);
+    color: var(--primary-magenta);
     display: flex;
     flex-direction: column;
     line-height: 1;
@@ -81,11 +82,11 @@ nav {
 }
 
 .nav-links a:hover {
-    color: var(--primary-blue);
+    color: var(--primary-magenta);
 }
 
 .btn-nav {
-    background: var(--primary-blue);
+    background: var(--primary-magenta);
     color: white !important;
     padding: 8px 20px;
     border-radius: 50px;
@@ -94,7 +95,20 @@ nav {
 /* Hero Section */
 .hero {
     padding: 80px 0;
-    background: radial-gradient(circle at 10% 20%, rgba(216, 241, 199, 0.4) 0%, rgba(226, 232, 240, 0.2) 90%);
+    background: radial-gradient(circle at 10% 20%, rgba(161, 0, 107, 0.05) 0%, rgba(0, 174, 239, 0.05) 90%);
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png'); /* Subtle texture */
+    opacity: 0.1;
+    pointer-events: none;
 }
 
 .hero-grid {
@@ -105,7 +119,7 @@ nav {
 }
 
 .badge {
-    background: var(--accent-yellow);
+    background: var(--primary-cyan);
     color: white;
     padding: 5px 15px;
     border-radius: 20px;
@@ -123,7 +137,7 @@ nav {
 }
 
 .highlight {
-    color: var(--primary-blue);
+    color: var(--primary-magenta);
     position: relative;
     z-index: 1;
 }
@@ -135,7 +149,7 @@ nav {
     left: 0;
     width: 100%;
     height: 10px;
-    background: rgba(34, 197, 94, 0.2);
+    background: rgba(161, 0, 107, 0.2);
     z-index: -1;
 }
 
@@ -152,19 +166,23 @@ nav {
 }
 
 .btn {
-    padding: 15px 35px;
-    border-radius: 12px;
+    padding: 18px 40px;
+    border-radius: 50px; /* More rounded for modern feel */
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
+    font-weight: 800;
+    font-size: 1.15rem;
     transition: var(--transition);
     border: none;
     cursor: pointer;
     text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .btn-primary {
-    background: var(--primary-blue);
+    background: var(--primary-magenta);
     color: white;
     box-shadow: 0 10px 20px -5px rgba(30, 58, 138, 0.3);
 }
@@ -176,8 +194,8 @@ nav {
 
 .btn-secondary {
     background: white;
-    color: var(--primary-blue);
-    border: 2px solid var(--primary-blue);
+    color: var(--primary-magenta);
+    border: 2px solid var(--primary-magenta);
 }
 
 .trust-indicators {
@@ -331,7 +349,7 @@ section {
 
 /* Benefits Section */
 .benefits {
-    background: var(--primary-blue);
+    background: var(--primary-magenta);
     color: white;
 }
 
@@ -347,16 +365,117 @@ section {
 
 .benefit-card {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 24px;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--primary-cyan);
 }
 
 .benefit-icon {
     font-size: 3rem;
     margin-bottom: 15px;
+}
+
+/* Before & After Styles */
+.before-after {
+    background: var(--bg-light);
+    padding: 100px 0;
+}
+
+.ba-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.ba-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.ba-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-5px);
+}
+
+.ba-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 20px;
+}
+
+.ba-item {
+    position: relative;
+}
+
+.ba-label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.ba-label.success {
+    background: var(--primary-green);
+}
+
+.placeholder-img {
+    background: linear-gradient(145deg, #f1f5f9, #e2e8f0);
+    aspect-ratio: 1/1.2;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #cbd5e1;
+}
+
+.placeholder-img.success {
+    background: linear-gradient(145deg, #f0fdf4, #dcfce7);
+    color: var(--primary-green);
+}
+
+.ba-info {
+    padding: 25px;
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+}
+
+.ba-info h4 {
+    color: var(--primary-magenta);
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.ba-info p {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .ba-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Social Proof */
@@ -375,14 +494,14 @@ section {
 }
 
 .stars {
-    color: var(--accent-yellow);
+    color: var(--primary-cyan);
     margin-bottom: 15px;
 }
 
 .user {
     margin-top: 20px;
     font-weight: 700;
-    color: var(--primary-blue);
+    color: var(--primary-magenta);
 }
 
 /* Offer Section */
@@ -397,8 +516,20 @@ section {
 .offer-content {
     flex: 1.2;
     padding: 60px;
-    background: linear-gradient(135deg, var(--primary-blue) 0%, #1a472a 100%);
+    background: linear-gradient(135deg, var(--primary-magenta) 0%, var(--coffee-brown) 100%);
     color: white;
+}
+
+.gift-text {
+    background: var(--primary-green);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: inline-block;
+    font-weight: 700;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    animation: pulse 2s infinite;
 }
 
 .countdown {
@@ -436,7 +567,7 @@ section {
 .new-price {
     font-size: 3rem;
     font-weight: 800;
-    color: var(--accent-yellow);
+    color: var(--primary-cyan);
     margin-bottom: 30px;
 }
 
@@ -727,7 +858,7 @@ img {
     gap: 10px;
 }
 .hero-rating .stars {
-    color: var(--accent-yellow);
+    color: var(--primary-cyan);
     font-size: 1.2rem;
 }
 .hero-rating .rating-text {
@@ -749,7 +880,7 @@ img {
     align-items: center;
     gap: 10px;
     font-weight: 700;
-    color: var(--primary-blue);
+    color: var(--primary-magenta);
     z-index: 10;
     animation: float 3s ease-in-out infinite reverse;
 }
@@ -805,7 +936,7 @@ img {
 }
 .guarantee-box i {
     font-size: 2rem;
-    color: var(--accent-yellow);
+    color: var(--primary-cyan);
 }
 .guarantee-box p {
     font-size: 0.85rem;
@@ -834,7 +965,7 @@ img {
 .bump-title {
     display: block;
     font-weight: 700;
-    color: var(--primary-blue);
+    color: var(--primary-magenta);
     margin-bottom: 5px;
 }
 .bump-desc {
@@ -941,7 +1072,7 @@ img {
     color: var(--text-muted);
 }
 .exit-popup-content h2 {
-    color: var(--primary-blue);
+    color: var(--primary-magenta);
     margin-bottom: 15px;
 }
 .promo-code {
@@ -957,3 +1088,113 @@ img {
     border-radius: 8px;
     letter-spacing: 2px;
 }
+
+/* How to Use Styles */
+.how-to-use {
+    background: white;
+    padding: 100px 0;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.step-card {
+    text-align: center;
+    padding: 40px;
+    background: var(--bg-light);
+    border-radius: 30px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    background: white;
+    box-shadow: var(--shadow-lg);
+}
+
+.step-num {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-magenta);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    box-shadow: 0 5px 15px rgba(161, 0, 107, 0.3);
+}
+
+.step-card i {
+    font-size: 3rem;
+    color: var(--primary-magenta);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.step-card h3 {
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+@media (max-width: 768px) {
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Comparison Table Styles */
+.comparison {
+    background: #fdfdfd;
+    padding: 100px 0;
+}
+
+.comparison-table-wrapper {
+    overflow-x: auto;
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    min-width: 600px;
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 25px;
+    text-align: right;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.comparison-table th {
+    background: #f8fafc;
+    color: var(--text-dark);
+    font-weight: 800;
+}
+
+.comparison-table .highlight-col {
+    background: rgba(161, 0, 107, 0.05);
+    color: var(--primary-magenta);
+    text-align: center;
+}
+
+.comparison-table tbody tr td:nth-child(2) {
+    background: rgba(161, 0, 107, 0.02);
+    font-weight: 700;
+    text-align: center;
+}
+
+.success { color: var(--primary-green); margin-left: 10px; }
+.danger { color: #ef4444; margin-left: 10px; }
+
