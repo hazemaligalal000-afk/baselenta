@@ -956,6 +956,38 @@ section {
     }
 }
 
+/* Why Different */
+.why-different {
+    margin-top: 60px;
+    padding: 50px 40px;
+    background: rgba(194,0,107,0.04);
+    border-radius: 40px;
+    border: 3px dashed rgba(194,0,107,0.15);
+    text-align: center;
+    position: relative;
+    transition: var(--transition);
+}
+
+.why-different:hover {
+    transform: scale(1.02);
+    background: rgba(194,0,107,0.06);
+    border-color: var(--primary-magenta);
+}
+
+.why-different p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .why-different {
+        padding: 30px 20px;
+    }
+    .why-different p {
+        font-size: 1.1rem;
+    }
+}
+
 /* ===== END COMBO SECTION ===== */
 
 .faq-accordion {
